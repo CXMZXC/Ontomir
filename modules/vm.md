@@ -2,13 +2,13 @@
 
 > Ethereum Virtual Machine execution environment for Ontomir SDK
 
-The `x/vm` module from [Ontomir/evm](https://github.com/Ontomir/evm) provides a fully compatible Ethereum Virtual Machine execution environment as a Ontomir SDK module.
+The `x/vm` module from Ontomir evm provides a fully compatible Ethereum Virtual Machine execution environment as a Ontomir SDK module.
 
 For conceptual understanding of EVM architecture and design, see \[EVM Architecture]\(/docs/evm/next/documentation/concepts/overview).
 
 ### Parameters <a href="#parameters" id="parameters"></a>
 
-The module parameters control EVM behavior and access policies ([source](https://github.com/Ontomir/evm/blob/v0.4.1/proto/Ontomir/evm/vm/v1/evm.proto)):
+The module parameters control EVM behavior and access policies :
 
 | Parameter                   | Type          | Default        | Description                                           |
 | --------------------------- | ------------- | -------------- | ----------------------------------------------------- |
@@ -99,7 +99,7 @@ type AccessControl struct {
 
 ### Chain Configuration <a href="#chain-configuration" id="chain-configuration"></a>
 
-Hard fork activation schedule ([source](https://github.com/Ontomir/evm/blob/v0.4.1/proto/Ontomir/evm/vm/v1/evm.proto#L86-L218)):
+Hard fork activation schedule :
 
 | Fork                   | Default | Type      | Opcodes/Features Added               |
 | ---------------------- | ------- | --------- | ------------------------------------ |
@@ -116,7 +116,7 @@ Hard fork activation schedule ([source](https://github.com/Ontomir/evm/blob/v0.4
 
 ### Static Precompiles <a href="#static-precompiles" id="static-precompiles"></a>
 
-Precompiled contracts at fixed addresses ([source](https://github.com/Ontomir/evm/blob/v0.4.1/x/vm/types/precompiles.go)):
+Precompiled contracts at fixed addresses :
 
 | Address         | Contract         | Gas Cost | Description             |
 | --------------- | ---------------- | -------- | ----------------------- |
@@ -149,7 +149,7 @@ evmd tx gov submit-proposal update-params-proposal.json
 
 #### MsgEthereumTx <a href="#msgethereumtx" id="msgethereumtx"></a>
 
-Primary message for EVM transactions ([source](https://github.com/Ontomir/evm/blob/v0.4.1/proto/Ontomir/evm/vm/v1/tx.proto)):
+Primary message for EVM transactions :
 
 ```
 message MsgEthereumTx {
@@ -293,7 +293,7 @@ evmd query vm trace-block 12345
 
 ### Hooks <a href="#hooks" id="hooks"></a>
 
-Post-transaction processing interface ([source](https://github.com/Ontomir/evm/blob/v0.4.1/x/vm/types/interfaces.go)):
+Post-transaction processing interface :
 
 ```
 type EvmHooks interface {
@@ -439,10 +439,6 @@ evmd query vm account 0xAddress
 
 #### Source Code <a href="#source-code" id="source-code"></a>
 
-* [VM Module Implementation](https://github.com/Ontomir/evm/tree/v0.4.1/x/vm)
-* [StateDB](https://github.com/Ontomir/evm/tree/v0.4.1/x/vm/statedb)
-* [Precompiles](https://github.com/Ontomir/evm/tree/v0.4.1/precompiles)
-* [AnteHandlers](https://github.com/Ontomir/evm/tree/v0.4.1/ante)
 * EVM Architecture - Conceptual overview
 * Fee Market Module - EIP-1559 implementation
 * ERC20 Module - Token conversions

@@ -4,8 +4,6 @@ export const footnote = ({children}) => { return \<span style=\{{ fontSize: '0.8
 
 ### Faucet <a href="#faucet" id="faucet"></a>
 
-To receive funds on the Ontomir EVM Devnet you can use [our faucet](https://faucet.ontomir.network/).
-
 Wallets will be topped up only to a maximum amount of each token at any given time.
 
 * Requests can be made using either a Ontomir or EVM style address.

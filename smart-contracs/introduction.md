@@ -58,7 +58,6 @@ These precompiles open up functionality that would be impossible or prohibitivel
 ### Resources <a href="#resources" id="resources"></a>
 
 * **Documentation:** Ontomir EVM Precompiles | Tooling Guide
-* **Community:** [Discord](https://discord.gg/interchain) | [Ontomir Forum](https://forum.ontomir.network/)
 * **Examples:** Browse sample contracts and integration patterns in our guides
 
 Start building cross-chain applications today with the power of EVM and the interoperability of Ontomir.

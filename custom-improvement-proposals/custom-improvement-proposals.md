@@ -4,7 +4,7 @@
 
 ### Operations[​](custom-improvement-proposals.md#operations) <a href="#operations" id="operations"></a>
 
-Operations are the base components of the Ethereum Virtual Machine (EVM) which allow the execution of the smart contract logic. When a developer builds a smart contract, the code written in Solidity, or Vyper, is not directly interpretable by the EVM. Before being able to execute the code in the blockchain, the contract has to be compiled via one of the available compilers, like [solc](https://docs.soliditylang.org/en/latest/using-the-compiler.html). The compilation converts the human-readable contract code into a sequence of operations that the virtual machine can interpret and execute to perform state transitions or query the latest committed state. These operations are called **opcodes**, and are contained in a structure called [**jump table**](https://github.com/Ontomir/evm/blob/main/x/vm/core/vm/jump_table.go#L120-L1094).
+Operations are the base components of the Ethereum Virtual Machine (EVM) which allow the execution of the smart contract logic. When a developer builds a smart contract, the code written in Solidity, or Vyper, is not directly interpretable by the EVM. Before being able to execute the code in the blockchain, the contract has to be compiled via one of the available compilers, like [solc](https://docs.soliditylang.org/en/latest/using-the-compiler.html). The compilation converts the human-readable contract code into a sequence of operations that the virtual machine can interpret and execute to perform state transitions or query the latest committed state. These operations are called **opcodes**, and are contained in a structure called .
 
 Each opcode is defined by specifying the logic that has to be executed when it is called inside the EVM, its relationship with the memory, and the gas cost associated with it. More specifically, an opcode is completely defined by:
 
@@ -39,13 +39,9 @@ OntomirEVMActivators = map[string]func(*vm.JumpTable){    "evmos_0": eips.Enable
 
 ### Activation of Improvement Proposals[​](custom-improvement-proposals.md#activation-of-improvement-proposals) <a href="#activation-of-improvement-proposals" id="activation-of-improvement-proposals"></a>
 
-Due to continuous changes in the users' interaction with the protocol, and to introduce a safety measure along with the freedom to customize the virtual machine behavior, custom improvement proposals are not active by default. The activation of selected improvement proposals is controlled by the [EVM module's parameters](https://github.com/Ontomir/evm/blob/main/proto/ethermint/evm/v1/evm.proto#L17-L18). There are two ways of introducing the required parameter changes:
+Due to continuous changes in the users' interaction with the protocol, and to introduce a safety measure along with the freedom to customize the virtual machine behavior, custom improvement proposals are not active by default. The activation of selected improvement proposals is controlled by the . There are two ways of introducing the required parameter changes:
 
 1. **Upgrade**: create a protocol upgrade handler which introduces the proposal name in the active list.
 2. **Governance**: create governance proposal to add an improvement proposal to the EVM module parameters.
 
 This approach gives developers the ability to react to security issues or market conditions, while keeping the chain's participants in the loop.
-
-### Additional Resources[​](custom-improvement-proposals.md#additional-resources) <a href="#additional-resources" id="additional-resources"></a>
-
-1. [Ontomir EVM Custom EIPs](https://github.com/Ontomir/evm/blob/main/app/eips/README.md): please refer to this document for a detailed description of how opcodes and custom improvement proposals have to be used in the Ontomir EVM framework.

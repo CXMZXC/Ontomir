@@ -10,17 +10,17 @@ The transaction lifecycle in Ontomir EVM involves a dual-phase process through C
 
 #### CheckTx Phase <a href="#checktx-phase" id="checktx-phase"></a>
 
-* **Transaction routing**: The ante handler identifies transaction type via extension options ([`ante/ante.go:18-71`](https://github.com/Ontomir/evm/blob/main/ante/ante.go#L18-L71))
-* **EVM validation**: MonoDecorator consolidates validation using go-ethereum's `txpool.ValidateTransaction()` ([`ante/evm/mono_decorator.go:99+`](https://github.com/Ontomir/evm/blob/main/ante/evm/mono_decorator.go#L99))
-* **Transaction filtering**: Uses `PendingFilter` with configurable `MinTip`, base fee, and transaction type filters ([`mempool/mempool.go:455-461`](https://github.com/Ontomir/evm/blob/main/mempool/mempool.go#L455-L461))
-* **Nonce gap handling**: Transactions with future nonces are queued locally via `InsertInvalidNonce()` ([`mempool/check_tx.go:21-23`](https://github.com/Ontomir/evm/blob/main/mempool/check_tx.go#L21-L23))
+* **Transaction routing**: The ante handler identifies transaction type via extension options
+* **EVM validation**: MonoDecorator consolidates validation using go-ethereum's `txpool.ValidateTransaction()`
+* **Transaction filtering**: Uses `PendingFilter` with configurable `MinTip`, base fee, and transaction type filters
+* **Nonce gap handling**: Transactions with future nonces are queued locally via `InsertInvalidNonce()`
 * **Mempool addition**: Valid transactions added to CometBFT mempool for P2P broadcast
 
 #### DeliverTx Phase <a href="#delivertx-phase" id="delivertx-phase"></a>
 
-* **Message unwrapping**: `msg.AsTransaction()` extracts Ethereum transaction from `MsgEthereumTx` ([`x/vm/keeper/msg_server.go:32`](https://github.com/Ontomir/evm/blob/main/x/vm/keeper/msg_server.go#L32))
-* **State transition**: `ApplyTransaction()` executes EVM logic with gas isolation ([`x/vm/keeper/state_transition.go:165-199`](https://github.com/Ontomir/evm/blob/main/x/vm/keeper/state_transition.go#L165-L199))
-* **Cache contexts**: Isolated execution with rollback capability ([`x/vm/keeper/state_transition.go:182`](https://github.com/Ontomir/evm/blob/main/x/vm/keeper/state_transition.go#L182))
+* **Message unwrapping**: `msg.AsTransaction()` extracts Ethereum transaction from `MsgEthereumTx`&#x20;
+* **State transition**: `ApplyTransaction()` executes EVM logic with gas isolation (
+* **Cache contexts**: Isolated execution with rollback capability&#x20;
 * **State commitment**: Successful transactions committed to Ontomir SDK store
 
 For detailed transaction flow and mempool behavior, see the \[Mempool documentation]\(/docs/evm/next/documentation/concepts/mempool#transaction-flow) and \[Ontomir SDK lifecycle]\(https://docs.Ontomir.network/main/basics/tx-lifecycle).
@@ -38,9 +38,9 @@ Ontomir EVM supports two transaction types:
 1. Ontomir transactions
 2. Ethereum transactions
 
-This is possible because the Ontomir EVM uses the [Ontomir-SDK](https://docs.ontomir.network/main) and implements the [Ethereum Virtual Machine](https://ethereum.org/en/developers/docs/evm/) as a module. In this way, Ontomir EVM provides the features and functionalities of Ethereum and Ontomir chains combined, and more.
+This is possible because the Ontomir EVM uses the Ontomir SDK and implements the [Ethereum Virtual Machine](https://ethereum.org/en/developers/docs/evm/) as a module. In this way, Ontomir EVM provides the features and functionalities of Ethereum and Ontomir chains combined, and more.
 
-Although most of the information included on both of these transaction types is similar, there are differences among them. An important difference, is that Ontomir transactions allow multiple messages on the same transaction. Conversely, Ethereum transactions don't have this possibility. Ontomir EVM implements Ethereum transactions by wrapping them in `MsgEthereumTx` ([`x/vm/types/tx.pb.go:36-43`](https://github.com/Ontomir/evm/blob/main/x/vm/types/tx.pb.go#L36-L43)), which contains:
+Although most of the information included on both of these transaction types is similar, there are differences among them. An important difference, is that Ontomir transactions allow multiple messages on the same transaction. Conversely, Ethereum transactions don't have this possibility. Ontomir EVM implements Ethereum transactions by wrapping them in `MsgEthereumTx` , which contains:
 
 * `From`: Ethereum signer address bytes for signature verification
 * `Raw`: Complete Ethereum transaction data
@@ -51,7 +51,7 @@ Find more information about these two types on the following sections.
 
 #### Ontomir Transactions <a href="#ontomir-transactions" id="ontomir-transactions"></a>
 
-On Ontomir chains, transactions are comprised of metadata held in contexts and `sdk.Msg`s that trigger state changes within a module through the module's Protobuf [Msg service](https://docs.ontomir.network/main/building-modules/msg-services).
+On Ontomir chains, transactions are comprised of metadata held in contexts and `sdk.Msg`s that trigger state changes within a module through the module's Protobuf .
 
 When users want to interact with an application and make state changes (e.g. sending coins), they create transactions. Ontomir transactions can have multiple `sdk.Msg`s. Each of these must be signed using the private key associated with the appropriate account(s), before the transaction is broadcasted to the network.
 
@@ -91,12 +91,12 @@ An Ethereum transaction includes the following information:
 
 For more information on Ethereum transactions and the transaction lifecycle, [go here](https://ethereum.org/en/developers/docs/transactions/).
 
-Ontomir EVM supports Ethereum transaction types defined in `AcceptedTxType` ([`ante/evm/mono_decorator.go:23-27`](https://github.com/Ontomir/evm/blob/main/ante/evm/mono_decorator.go#L23-L27)):
+Ontomir EVM supports Ethereum transaction types defined in `AcceptedTxType` :
 
 * **Legacy Transactions** (EIP-155): With chain ID protection
 * **Access List Transactions** (EIP-2930): Pre-declared storage access
 * **Dynamic Fee Transactions** (EIP-1559): Base fee + priority fee model
-* **Set Code Transactions** (EIP-7702): Account code assignment with authorization list support ([`x/vm/types/tx.go:28`](https://github.com/Ontomir/evm/blob/main/x/vm/types/tx.go#L28))
+* **Set Code Transactions** (EIP-7702): Account code assignment with authorization list support&#x20;
 
 \*\*Note\*\*: Unprotected legacy transactions are not supported by default.
 
@@ -105,31 +105,31 @@ Ontomir EVM is capable of processing Ethereum transactions by wrapping them on a
 The `MsgEthereumTx` implements both `sdk.Msg` and `sdk.Tx` interfaces to bypass standard Ontomir SDK transaction bundling. This design enables:
 
 * **Direct go-ethereum integration**: Uses `txpool.ValidateTransaction()` instead of SDK ante handlers
-* **Gas isolation**: EVM execution uses infinite gas meter, bypassing SDK gas consumption ([`x/vm/keeper/state_transition.go:153-164`](https://github.com/Ontomir/evm/blob/main/x/vm/keeper/state_transition.go#L153-L164))
-* **Economic validation**: `CheckSenderBalance()` compares account balance with transaction cost ([`x/vm/keeper/fees.go:24-39`](https://github.com/Ontomir/evm/blob/main/x/vm/keeper/fees.go#L24-L39))
-* **Single message constraint**: Only one EVM message per transaction ([`ante/evm/mono_decorator.go:88-91`](https://github.com/Ontomir/evm/blob/main/ante/evm/mono_decorator.go#L88-L91))
+* **Gas isolation**: EVM execution uses infinite gas meter, bypassing SDK gas consumption&#x20;
+* **Economic validation**: `CheckSenderBalance()` compares account balance with transaction cost&#x20;
+* **Single message constraint**: Only one EVM message per transaction&#x20;
 
 **EVM Execution Integration**
 
 Ontomir EVM creates a sophisticated execution environment that bridges Ethereum and Ontomir SDK state management:
 
-**Block Context Mapping** ([`x/vm/keeper/state_transition.go:46-57`](https://github.com/Ontomir/evm/blob/main/x/vm/keeper/state_transition.go#L46-L57)):
+**Block Context Mapping** :
 
 * CometBFT block proposer → EVM coinbase address
 * Block height → EVM block number
 * Block timestamp → EVM timestamp opcode
-* Historical block access via EIP-2935 contract ([`x/vm/keeper/state_transition.go:114-122`](https://github.com/Ontomir/evm/blob/main/x/vm/keeper/state_transition.go#L114-L122))
+* Historical block access via EIP-2935 contract&#x20;
 
-**Access Control Hooks** ([`x/vm/keeper/state_transition.go:67-78`](https://github.com/Ontomir/evm/blob/main/x/vm/keeper/state_transition.go#L67-L78)):
+**Access Control Hook** :
 
 * Restrict contract creation and execution via EVM opcode interceptors
 * Policy-based permissions for `CREATE`, `CREATE2`, and `CALL` operations
 
-**Receipt Generation** ([`x/vm/keeper/state_transition.go:125`](https://github.com/Ontomir/evm/blob/main/x/vm/keeper/state_transition.go#L125)):
+**Receipt Generation** :
 
 * Ethereum-compatible bloom filters for log filtering
-* Dual transaction hash emission for cross-ecosystem compatibility ([`x/vm/keeper/msg_server.go:77-80`](https://github.com/Ontomir/evm/blob/main/x/vm/keeper/msg_server.go#L77-L80))
-* Contract address generation via `crypto.CreateAddress()` ([`x/vm/keeper/state_transition.go:198`](https://github.com/Ontomir/evm/blob/main/x/vm/keeper/state_transition.go#L198))
+* Dual transaction hash emission for cross-ecosystem compatibility&#x20;
+* Contract address generation via `crypto.CreateAddress()`&#x20;
 
 #### IBC Integration <a href="#ibc-integration" id="ibc-integration"></a>
 
@@ -165,13 +165,13 @@ For detailed mempool behavior and flow diagrams, see \[Mempool Architecture]\(/d
 
 ### Transaction Receipts <a href="#transaction-receipts" id="transaction-receipts"></a>
 
-Ontomir EVM generates Ethereum-compatible transaction receipts while integrating with Ontomir SDK event systems. Receipt processing ([`x/vm/keeper/state_transition.go:125-146`](https://github.com/Ontomir/evm/blob/main/x/vm/keeper/state_transition.go#L125-L146)) includes:
+Ontomir EVM generates Ethereum-compatible transaction receipts while integrating with Ontomir SDK event systems. Receipt processing  includes:
 
 **Bloom Filter Computation**: `initializeBloomFromLogs()` creates transaction and block-level bloom filters for efficient log filtering.
 
 **Gas Reconciliation**: `calculateCumulativeGasFromEthResponse()` reconciles EVM gas usage with SDK gas meter state.
 
-**Dual Event Emission**: Events contain both Ethereum transaction hash (for Ethereum tools) and CometBFT transaction hash (for Ontomir tools) ([`x/vm/keeper/msg_server.go:77-80`](https://github.com/Ontomir/evm/blob/main/x/vm/keeper/msg_server.go#L77-L80)).
+**Dual Event Emission**: Events contain both Ethereum transaction hash (for Ethereum tools) and CometBFT transaction hash (for Ontomir tools) .
 
 Receipt fields include:
 
@@ -195,20 +195,20 @@ Receipt fields include:
 
 **Transaction Processing Core**:
 
-* **Message Definition**: [`x/vm/types/tx.pb.go:36-43`](https://github.com/Ontomir/evm/blob/main/x/vm/types/tx.pb.go#L36-L43) - `MsgEthereumTx` protobuf structure with dual interface implementation
-* **Transaction Types**: [`x/vm/types/tx.go:13-29`](https://github.com/Ontomir/evm/blob/main/x/vm/types/tx.go#L13-L29) - `EvmTxArgs` supporting all transaction types including EIP-7702 authorization lists
-* **Validation Pipeline**: [`ante/evm/mono_decorator.go`](https://github.com/Ontomir/evm/blob/main/ante/evm/mono_decorator.go) - Consolidated EVM transaction validation with go-ethereum integration
-* **Execution Entry**: [`x/vm/keeper/msg_server.go:29-47`](https://github.com/Ontomir/evm/blob/main/x/vm/keeper/msg_server.go#L29-L47) - Message server processing and telemetry
+* **Message Definition**: `x/vm/types/tx.pb.go:36-43` - `MsgEthereumTx` protobuf structure with dual interface implementation
+* **Transaction Types**: `x/vm/types/tx.go:13-29` - `EvmTxArgs` supporting all transaction types including EIP-7702 authorization lists
+* **Validation Pipeline**: `ante/evm/mono_decorator.go` - Consolidated EVM transaction validation with go-ethereum integration
+* **Execution Entry**: `x/vm/keeper/msg_server.go:29-47` - Message server processing and telemetry
 
 **State Management Engine**:
 
-* **State Transition**: [`x/vm/keeper/state_transition.go:165-199`](https://github.com/Ontomir/evm/blob/main/x/vm/keeper/state_transition.go#L165-L199) - Cache contexts, gas isolation, and EVM execution
-* **EVM Integration**: [`x/vm/keeper/state_transition.go:38-78`](https://github.com/Ontomir/evm/blob/main/x/vm/keeper/state_transition.go#L38-L78) - Block context mapping and access control hooks
-* **Economic Validation**: [`x/vm/keeper/fees.go`](https://github.com/Ontomir/evm/blob/main/x/vm/keeper/fees.go) - Balance verification, fee deduction, and SDK integration
+* **State Transition**: `x/vm/keeper/state_transition.go:165-199` - Cache contexts, gas isolation, and EVM execution
+* **EVM Integration**: `x/vm/keeper/state_transition.go:38-78` - Block context mapping and access control hooks
+* **Economic Validation**: `x/vm/keeper/fees.go` - Balance verification, fee deduction, and SDK integration
 
 **Mempool Architecture**:
 
-* **ExperimentalEVMMempool**: [`mempool/mempool.go:44-70`](https://github.com/Ontomir/evm/blob/main/mempool/mempool.go#L44-L70) - Unified mempool managing both EVM and Ontomir transactions with fee-based prioritization
-* **Transaction Filtering**: [`mempool/mempool.go:455-461`](https://github.com/Ontomir/evm/blob/main/mempool/mempool.go#L455-L461) - Configurable filtering by minimum tip, base fee, and transaction types
-* **Transaction Broadcasting**: [`mempool/mempool.go:473-497`](https://github.com/Ontomir/evm/blob/main/mempool/mempool.go#L473-L497) - Automatic EVM transaction wrapping and broadcast via `MsgEthereumTx`
-* **Transaction Routing**: [`mempool/check_tx.go:16-40`](https://github.com/Ontomir/evm/blob/main/mempool/check_tx.go#L16-L40) - Nonce gap detection and local queuing mechanism
+* **ExperimentalEVMMempool**: `mempool/mempool.go:44-70` - Unified mempool managing both EVM and Ontomir transactions with fee-based prioritization
+* **Transaction Filtering**: `mempool/mempool.go:455-461` - Configurable filtering by minimum tip, base fee, and transaction types
+* **Transaction Broadcasting**: `mempool/mempool.go:473-497` - Automatic EVM transaction wrapping and broadcast via `MsgEthereumTx`
+* **Transaction Routing**: `mempool/check_tx.go:16-40` - Nonce gap detection and local queuing mechanism

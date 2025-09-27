@@ -2,7 +2,7 @@
 
 > Extended precision wrapper for x/bank enabling 18 decimal support
 
-The `x/precisebank` module from [Ontomir/evm](https://github.com/Ontomir/evm) extends the standard `x/bank` module from 6 to 18 decimal precision for EVM compatibility.
+The `x/precisebank` module from Ontomir evm extends the standard `x/bank` module from 6 to 18 decimal precision for EVM compatibility.
 
 For conceptual understanding of precision handling and mathematical proofs, see \[Precision Handling]\(/docs/evm/next/documentation/concepts/precision-handling).
 
@@ -19,7 +19,7 @@ Developed with contributions from the \[Kava]\(https://www.kava.io/) team.
 
 ### State <a href="#state" id="state"></a>
 
-The module maintains fractional balances and remainder ([source](https://github.com/Ontomir/evm/blob/v0.4.1/x/precisebank/types/keys.go)):
+The module maintains fractional balances and remainder :
 
 | Object              | Key              | Value      | Description                               |
 | ------------------- | ---------------- | ---------- | ----------------------------------------- |
@@ -42,7 +42,7 @@ Where:
 
 ### Keeper Interface <a href="#keeper-interface" id="keeper-interface"></a>
 
-The module provides a bank-compatible keeper ([source](https://github.com/Ontomir/evm/blob/v0.4.1/x/precisebank/keeper/keeper.go)):
+The module provides a bank-compatible keeper :
 
 ```
 type Keeper interface {
@@ -350,14 +350,3 @@ evmd query precisebank remainder
 evmd query bank balances Ontomir1... --denom test
 evmd query precisebank fractional-balance Ontomir1...
 ```
-
-### References <a href="#references" id="references"></a>
-
-#### Source Code <a href="#source-code" id="source-code"></a>
-
-* [PreciseBank Module](https://github.com/Ontomir/evm/tree/v0.4.1/x/precisebank) - Implementation
-* [Keeper](https://github.com/Ontomir/evm/blob/v0.4.1/x/precisebank/keeper/) - Core logic
-* [Proto Definitions](https://github.com/Ontomir/evm/tree/v0.4.1/proto/Ontomir/evm/precisebank/v1) - API specs
-* Precision Handling - Mathematical foundation
-* VM Module - EVM integration
-* [Bank Module](https://docs.ontomir.network/main/modules/bank) - Underlying module

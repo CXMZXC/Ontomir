@@ -102,11 +102,11 @@ bankPrecompile, err := bankprecompile.NewPrecompile(
 )
 ```
 
-**Source:** [`evmd/precompiles.go:122`](https://github.com/Ontomir/evm/blob/main/evmd/precompiles.go#L122)
+
 
 #### Required Interfaces <a href="#required-interfaces" id="required-interfaces"></a>
 
-The following keeper interfaces are defined in [`precompiles/common/interfaces.go`](https://github.com/Ontomir/evm/blob/main/precompiles/common/interfaces.go):
+The following keeper interfaces are defined in :
 
 * `BankKeeper`: Account balances, token transfers, metadata
 * `StakingKeeper`: Validator operations, delegations, bond denom

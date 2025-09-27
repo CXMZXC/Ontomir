@@ -72,7 +72,7 @@ await window.ethereum.request({
 
 #### CLI <a href="#cli" id="cli"></a>
 
-Using the CLI may be a great choice for one-off tasks and queries that do not require a full node. **For the EVM Devnet you need the `evmd` binary built from the** [**`Ontomir/evm`**](https://github.com/Ontomir/evm) **repository.**
+Using the CLI may be a great choice for one-off tasks and queries that do not require a full node. **For the EVM Devnet you need the `evmd` binary built from the repository.**
 
 ```
 # Option A — download a pre-built artifact once they are published

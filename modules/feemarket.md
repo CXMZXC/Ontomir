@@ -2,13 +2,13 @@
 
 > EIP-1559 modualarized
 
-The feemarket module from [Ontomir/evm](https://github.com/Ontomir/evm) implements [EIP-1559](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1559.md) dynamic fee pricing for Ontomir SDK chains with EVM compatibility.
+The feemarket module from Ontomir evm implements [EIP-1559](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1559.md) dynamic fee pricing for Ontomir SDK chains with EVM compatibility.
 
 This is part of Ontomir/evm, not standard Ontomir SDK. For conceptual understanding of EIP-1559, see \[EIP-1559 Fee Market]\(/docs/evm/next/documentation/concepts/eip-1559-feemarket).
 
 ### Parameters <a href="#parameters" id="parameters"></a>
 
-The module contains the following parameters ([types](https://github.com/Ontomir/evm/blob/v0.4.1/x/feemarket/types/params.go), [proto](https://github.com/Ontomir/evm/blob/v0.4.1/proto/Ontomir/evm/feemarket/v1/feemarket.proto)):
+The module contains the following parameters :
 
 | Parameter                  | Type    | Default      | Description                                                   |
 | -------------------------- | ------- | ------------ | ------------------------------------------------------------- |
@@ -52,7 +52,7 @@ This prevents fees from dropping too low during periods of low activity, maintai
 
 #### Parameter Storage Format <a href="#parameter-storage-format" id="parameter-storage-format"></a>
 
-`sdk.Dec` (LegacyDec) values are stored as strings with 18 decimal precision ([Ontomir-sdk](https://github.com/Ontomir/Ontomir-sdk/blob/main/math/dec.go)):
+`sdk.Dec` (LegacyDec) values are stored as strings with 18 decimal precision :
 
 | Human Value | Stored String                  | Formula      |
 | ----------- | ------------------------------ | ------------ |
@@ -62,7 +62,7 @@ This prevents fees from dropping too low during periods of low activity, maintai
 
 ### Configuration <a href="#configuration" id="configuration"></a>
 
-Adjust parameters to achieve specific network behaviors ([params validation](https://github.com/Ontomir/evm/blob/v0.4.1/x/feemarket/types/params.go#L43-L142)):
+Adjust parameters to achieve specific network behaviors :
 
 | **Goal**                | **Parameter**                 | **Adjustment** | **Effect**                               |
 | ----------------------- | ----------------------------- | -------------- | ---------------------------------------- |
@@ -119,7 +119,7 @@ The module supports different token decimal configurations:
 
 ### Configuration In Production <a href="#configuration-in-production" id="configuration-in-production"></a>
 
-Parameters can be updated through governance proposals ([msg server](https://github.com/Ontomir/evm/blob/v0.4.1/x/feemarket/keeper/msg_server.go)):
+Parameters can be updated through governance proposals :
 
 ```
 // MsgUpdateParams structure
@@ -222,7 +222,7 @@ const isHighFee = currentBaseFee > threshold;
 
 #### EVM JSON-RPC <a href="#evm-json-rpc" id="evm-json-rpc"></a>
 
-The fee market integrates with standard Ethereum JSON-RPC methods ([RPC backend](https://github.com/Ontomir/evm/blob/v0.4.1/rpc/backend/chain_info.go)):
+The fee market integrates with standard Ethereum JSON-RPC methods :
 
 Returns the current base fee as hex string. In EIP-1559 mode, returns the base fee; in legacy mode, returns the median gas price.
 
@@ -403,7 +403,7 @@ GET /Ontomir/feemarket/v1/block_gas
 
 #### State <a href="#state" id="state"></a>
 
-The module maintains the following state ([genesis proto](https://github.com/Ontomir/evm/blob/v0.4.1/proto/Ontomir/evm/feemarket/v1/genesis.proto)):
+The module maintains the following state :
 
 **State Objects**
 
@@ -424,7 +424,7 @@ type GenesisState struct {
 
 #### Begin Block <a href="#begin-block" id="begin-block"></a>
 
-At the beginning of each block, the module calculates and sets the new base fee ([source](https://github.com/Ontomir/evm/blob/v0.4.1/x/feemarket/keeper/abci.go#L16-L45)):
+At the beginning of each block, the module calculates and sets the new base fee :
 
 ```
 func (k Keeper) BeginBlock(ctx sdk.Context) error {
@@ -451,7 +451,7 @@ func (k Keeper) BeginBlock(ctx sdk.Context) error {
 
 #### End Block <a href="#end-block" id="end-block"></a>
 
-At the end of each block, the module updates the gas wanted for base fee calculation ([source](https://github.com/Ontomir/evm/blob/v0.4.1/x/feemarket/keeper/abci.go#L47-L92)):
+At the end of each block, the module updates the gas wanted for base fee calculation :
 
 ```
 func (k Keeper) EndBlock(ctx sdk.Context) error {
@@ -480,7 +480,7 @@ func (k Keeper) EndBlock(ctx sdk.Context) error {
 
 #### Base Fee Calculation Algorithm <a href="#base-fee-calculation-algorithm" id="base-fee-calculation-algorithm"></a>
 
-The calculation follows the EIP-1559 specification with Ontomir SDK adaptations ([source](https://github.com/Ontomir/evm/blob/v0.4.1/x/feemarket/keeper/eip1559.go#L18-L69), [utils](https://github.com/Ontomir/evm/blob/v0.4.1/utils/utils.go#L229-L254)):
+The calculation follows the EIP-1559 specification with Ontomir SDK adaptations :
 
 \`\`\`go func CalcGasBaseFee(gasUsed, gasTarget, baseFeeChangeDenom uint64, baseFee, minUnitGas, minGasPrice LegacyDec) LegacyDec { // No change if at target if gasUsed == gasTarget { return baseFee }
 
@@ -548,11 +548,11 @@ Example:
 
 #### AnteHandlers <a href="#antehandlers" id="antehandlers"></a>
 
-The module integrates with EVM transactions through the `EVMMonoDecorator`, which performs all fee-related validations in a single pass ([source](https://github.com/Ontomir/evm/blob/v0.4.1/ante/evm/mono_decorator.go#L50-L252)):
+The module integrates with EVM transactions through the `EVMMonoDecorator`, which performs all fee-related validations in a single pass :
 
 **EVMMonoDecorator**
 
-The primary ante handler that validates and processes EVM transaction fees ([mono\_decorator.go](https://github.com/Ontomir/evm/blob/v0.4.1/ante/evm/mono_decorator.go)):
+The primary ante handler that validates and processes EVM transaction fees :
 
 \`\`\`go // 1. Check mempool minimum fee (for pre-London transactions) if ctx.IsCheckTx() && !simulate && !isLondon { requiredFee := mempoolMinGasPrice.Mul(gasLimit) if fee.LT(requiredFee) { return ErrInsufficientFee } }
 
@@ -591,7 +591,7 @@ func CheckMempoolFee(fee, mempoolMinGasPrice, gasLimit LegacyDec, isLondon bool)
 
 **CheckGlobalFee**
 
-Enforces the chain-wide minimum gas price set via governance ([source](https://github.com/Ontomir/evm/blob/v0.4.1/ante/evm/03_global_fee.go#L20-L36)):
+Enforces the chain-wide minimum gas price set via governance :
 
 \`\`\`go func CheckGlobalFee(fee, globalMinGasPrice, gasLimit LegacyDec) error { if globalMinGasPrice.IsZero() { return nil }
 
@@ -643,7 +643,7 @@ This cumulative gas wanted is used at the end of the block to calculate the next
 
 #### Ontomir/evm vs Standard Ontomir SDK <a href="#ontomirevm-vs-standard-ontomir-sdk" id="ontomirevm-vs-standard-ontomir-sdk"></a>
 
-This fee market module from [Ontomir/evm](https://github.com/Ontomir/evm/tree/v0.4.1/x/feemarket) differs from standard Ontomir SDK fee handling:
+This fee market module from Ontomir evm differs from standard Ontomir SDK fee handling:
 
 | **Aspect**            | **Standard Ontomir SDK**                    | **Ontomir/evm Feemarket**                 |
 | --------------------- | ------------------------------------------- | ----------------------------------------- |
@@ -658,23 +658,15 @@ This fee market module from [Ontomir/evm](https://github.com/Ontomir/evm/tree/v0
 
 The module integrates with EVM through:
 
-* **AnteHandlers**: Custom decorators for EVM transaction validation ([source](https://github.com/Ontomir/evm/blob/v0.4.1/ante/evm/))
-* **Hooks**: PostTxProcessing for EVM state updates ([source](https://github.com/Ontomir/evm/blob/v0.4.1/x/feemarket/keeper/hooks.go))
-* **RPC**: Ethereum JSON-RPC methods for fee queries ([source](https://github.com/Ontomir/evm/blob/v0.4.1/rpc/backend/chain_info.go))
+* **AnteHandlers**: Custom decorators for EVM transaction validation&#x20;
+* **Hooks**: PostTxProcessing for EVM state updates&#x20;
+* **RPC**: Ethereum JSON-RPC methods for fee queries
 
 ### References <a href="#references" id="references"></a>
-
-#### Source Code <a href="#source-code" id="source-code"></a>
-
-* [Ontomir/evm Fee Market Module](https://github.com/Ontomir/evm/tree/v0.4.1/x/feemarket) - Main module implementation
-* [AnteHandlers](https://github.com/Ontomir/evm/tree/v0.4.1/ante/evm) - EVM transaction validation
-* [Proto Definitions](https://github.com/Ontomir/evm/tree/v0.4.1/proto/Ontomir/evm/feemarket/v1) - API and state structures
-* [RPC Implementation](https://github.com/Ontomir/evm/tree/v0.4.1/rpc/backend) - Ethereum JSON-RPC support
 
 #### Specifications <a href="#specifications" id="specifications"></a>
 
 * [EIP-1559 Specification](https://eips.ethereum.org/EIPS/eip-1559) - Original Ethereum proposal
-* [Ontomir SDK Docs](https://docs.ontomir.network/) - Base framework documentation
 
 #### Tools & Libraries <a href="#tools-andamp-libraries" id="tools-andamp-libraries"></a>
 

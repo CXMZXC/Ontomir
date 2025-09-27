@@ -304,8 +304,4 @@ func TestERC20PrecompileMigration(t *testing.T) {
 * Test token transfers work
 * Confirm IBC token conversions function
 
-### References <a href="#references" id="references"></a>
-
-* [GitHub Issue #424](https://github.com/Ontomir/evm/issues/424)
-* [MANTRA-Chain Implementation](https://github.com/MANTRA-Chain/mantrachain/pull/409)
-* [E2E Test Suite](https://github.com/MANTRA-Chain/mantrachain-e2e/pull/41)
+### &#x20;<a href="#references" id="references"></a>

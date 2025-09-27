@@ -8,8 +8,6 @@ The Bank precompile provides ERC20-style access to native Ontomir SDK tokens, en
 
 **Address**: `0x0000000000000000000000000000000000000804`
 
-**Related Module**: [x/bank](https://docs.ontomir.network/main/modules/bank)
-
 ### Gas Costs <a href="#gas-costs" id="gas-costs"></a>
 
 * **balances**: 2,851 + (2,851 × (n-1)) where n = number of tokens returned

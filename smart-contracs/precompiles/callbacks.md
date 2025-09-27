@@ -8,8 +8,6 @@ The Callbacks module provides a standardized interface for smart contracts to ha
 
 This is not a precompile that is called directly, but rather an interface that a contract must implement to receive callbacks.
 
-\*\*]\([https://github.com/Ontomir/ibc-go/blob/main/modules/apps/callbacks/README.md](https://github.com/Ontomir/ibc-go/blob/main/modules/apps/callbacks/README.md))
-
 ### Callback Functions <a href="#callback-functions" id="callback-functions"></a>
 
 A contract that sends an IBC transfer may need to listen for the outcome of the packet lifecycle. `Ack` and `Timeout` callbacks allow contracts to execute custom logic on the basis of how the packet lifecycle completes. The sender of an IBC transfer packet may specify a contract to be called when the packet lifecycle completes. This contract must implement the expected entrypoints for `onPacketAcknowledgement` and `onPacketTimeout`.

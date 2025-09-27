@@ -406,7 +406,4 @@ For Ontomir EVM chains, specific migrations include:
 * Thoroughly test transformations
 * Ensure old data is properly cleaned up
 
-### References <a href="#references" id="references"></a>
-
-* [Ontomir SDK Upgrade Module](https://docs.ontomir.network/main/build/modules/upgrade)
-* [Cosmovisor Documentation](https://docs.ontomir.network/main/build/tooling/cosmovisor)
+### &#x20;<a href="#references" id="references"></a>

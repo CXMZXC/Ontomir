@@ -14,4 +14,3 @@ In terms of compatibility, secp256k1 is more widely supported by existing system
 When choosing between secp256k1 and ed25519, you should consider your specific needs in terms of security, performance, and compatibility. If you are building an application that requires high performance and compatibility with existing systems, secp256k1 may be a better choice. However, if you are building an application that requires a higher level of security and performance, and you can afford to sacrifice some compatibility, ed25519 may be a better choice.
 ```
 
-Head over to Ontomir's \[Buf]\(https://buf.build/Ontomir).

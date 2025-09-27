@@ -2,13 +2,13 @@
 
 > Token pair management and conversion between Ontomir coins and ERC20 tokens
 
-The `x/erc20` module from [Ontomir/evm](https://github.com/Ontomir/evm) enables bidirectional conversion between Ontomir SDK coins and ERC20 tokens within the EVM runtime.
+The `x/erc20` module from Ontomir evm enables bidirectional conversion between Ontomir SDK coins and ERC20 tokens within the EVM runtime.
 
 For conceptual understanding of Single Token Representation v2, see \[Single Token Representation]\(/docs/evm/next/documentation/concepts/single-token-representation).
 
 ### Parameters <a href="#parameters" id="parameters"></a>
 
-The module parameters control token conversion and registration ([source](https://github.com/Ontomir/evm/blob/v0.4.1/proto/Ontomir/evm/erc20/v1/genesis.proto)):
+The module parameters control token conversion and registration :
 
 | Parameter                     | Type | Default | Description                           |
 | ----------------------------- | ---- | ------- | ------------------------------------- |
@@ -31,7 +31,7 @@ Controls who can register new ERC20 tokens:
 
 ### State <a href="#state" id="state"></a>
 
-The module maintains token pair mappings and allowances ([source](https://github.com/Ontomir/evm/blob/v0.4.1/x/erc20/types/keys.go)):
+The module maintains token pair mappings and allowances :
 
 | Object               | Key              | Value       | Description                 |
 | -------------------- | ---------------- | ----------- | --------------------------- |
@@ -74,7 +74,7 @@ type TokenPair struct {
 
 #### MsgRegisterERC20 <a href="#msgregistererc20" id="msgregistererc20"></a>
 
-Register existing ERC20 contracts for conversion ([source](https://github.com/Ontomir/evm/blob/v0.4.1/proto/Ontomir/evm/erc20/v1/tx.proto#L104-L118)):
+Register existing ERC20 contracts for conversion :
 
 ```
 message MsgRegisterERC20 {
@@ -213,7 +213,7 @@ interface IWERC20 is IERC20 {
 
 #### IBC Middleware v1 <a href="#ibc-middleware-v1" id="ibc-middleware-v1"></a>
 
-Standard IBC transfer integration ([source](https://github.com/Ontomir/evm/blob/v0.4.1/x/erc20/ibc_middleware.go)):
+Standard IBC transfer integration :
 
 \`\`\`go // Automatic registration and conversion on receive OnRecvPacket(packet) { // Auto-register new IBC tokens (with "ibc/" prefix) if !tokenPairExists && hasPrefix(denom, "ibc/") { RegisterERC20Extension(denom) }
 
@@ -419,15 +419,3 @@ evmd query erc20 params
 evmd query bank balances Ontomir1...
 evmd query vm balance 0x...
 ```
-
-### References <a href="#references" id="references"></a>
-
-#### Source Code <a href="#source-code" id="source-code"></a>
-
-* [ERC20 Module](https://github.com/Ontomir/evm/tree/v0.4.1/x/erc20) - Module implementation
-* [Precompiles](https://github.com/Ontomir/evm/tree/v0.4.1/precompiles/erc20) - ERC20 precompile contracts
-* [IBC Middleware](https://github.com/Ontomir/evm/tree/v0.4.1/x/erc20/ibc_middleware.go) - IBC integration
-* [Proto Definitions](https://github.com/Ontomir/evm/tree/v0.4.1/proto/Ontomir/evm/erc20/v1) - API specifications
-* Single Token Representation - Conceptual overview
-* VM Module - EVM execution environment
-* [Bank Module](https://docs.ontomir.network/main/modules/bank) - Native token management

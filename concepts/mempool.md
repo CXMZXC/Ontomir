@@ -46,7 +46,7 @@ CometBFT receives the transactions and validates them in the app using CheckTx.
 
 #### 3. CheckTx Routing <a href="#id-3-checktx-routing" id="id-3-checktx-routing"></a>
 
-The CheckTx handler processes transactions with special handling for nonce gaps ([source](https://github.com/Ontomir/evm/blob/v0.4.1/mempool/check_tx.go)):
+The CheckTx handler processes transactions with special handling for nonce gaps:
 
 **Success Path** - Valid transactions with correct nonces pass through to the Comet mempool for broadcast.
 
@@ -367,8 +367,6 @@ func customBroadcastFunction(txs []*ethtypes.Transaction) error {
 
 **LegacyPoolConfig Parameters**
 
-**Source:** [`mempool/txpool/legacypool/legacypool.go:168-178`](https://github.com/Ontomir/evm/blob/main/mempool/txpool/legacypool/legacypool.go#L168-178)
-
 ```
 type Config struct {
     // Transaction pool capacity
@@ -561,10 +559,6 @@ LegacyPoolConfig: &legacypool.Config{
 ### State Management <a href="#state-management" id="state-management"></a>
 
 The mempool maintains transaction state through the unified `ExperimentalEVMMempool` structure, which manages separate pools for EVM and Ontomir transactions while providing a single interface. This experimental implementation handles fee-based prioritization, nonce sequencing, and transaction verification through an integrated ante handler.
-
-### Testing <a href="#testing" id="testing"></a>
-
-The mempool behavior can be verified using the test scripts provided in the [Ontomir/evm](https://github.com/Ontomir/evm) repository. The [`tests/systemtests/Counter/script/SimpleSends.s.sol`](https://github.com/Ontomir/evm/blob/v0.4.1/tests/systemtests/Counter/script/SimpleSends.s.sol) script demonstrates typical Ethereum tooling behavior - it sends 10 sequential transactions in a batch, which naturally arrive out of order and create nonce gaps.
 
 ### Integration <a href="#integration-1" id="integration-1"></a>
 

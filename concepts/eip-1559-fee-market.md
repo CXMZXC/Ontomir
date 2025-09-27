@@ -168,5 +168,4 @@ It smooths volatility but can't prevent spikes during extreme congestion. The ad
 
 * [Original EIP-1559 Proposal](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1559.md)
 * [Ethereum Gas Tracker](https://etherscan.io/gastracker)
-* [Ontomir/evm Fee Market Module](https://github.com/Ontomir/evm/tree/v0.4.1/x/feemarket)
 * Understanding Gas and Fees

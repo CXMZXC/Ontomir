@@ -2,7 +2,7 @@
 
 > Inter-Blockchain Communication protocol implementation with EVM callbacks
 
-The `x/ibc` module from [Ontomir/evm](https://github.com/Ontomir/evm) implements Inter-Blockchain Communication (IBC) protocol support with specialized EVM callback functionality for cross-chain smart contract interactions.
+The `x/ibc` module from Ontomir evm implements Inter-Blockchain Communication (IBC) protocol support with specialized EVM callback functionality for cross-chain smart contract interactions.
 
 ### Overview <a href="#overview" id="overview"></a>
 
@@ -16,7 +16,7 @@ The IBC module extends the standard IBC protocol with EVM-specific features:
 
 #### IBC Callbacks <a href="#ibc-callbacks" id="ibc-callbacks"></a>
 
-The EVM Callbacks module implements the EVM contractKeeper interface that interacts with ibc-go's [callbacks middleware](https://github.com/Ontomir/ibc-go/blob/main/modules/apps/callbacks/README.md), specifically for ICS-20 transfer applications.
+The EVM Callbacks module implements the EVM contractKeeper interface that interacts with ibc-go's callbacks middleware, specifically for ICS-20 transfer applications.
 
 **Key Features:**
 
@@ -89,9 +89,3 @@ EVM callbacks use the `memo` field in ICS-20 transfers with specific JSON struct
 * IBC Overview - IBC concepts and fundamentals
 * ICS20 Precompile - Cross-chain token transfers
 * Callbacks Interface - Smart contract callback interface
-
-### External Resources <a href="#external-resources" id="external-resources"></a>
-
-* [IBC Protocol Specification](https://ibc.ontomir.network/)
-* [IBC-Go Callbacks Middleware](https://github.com/Ontomir/ibc-go/blob/main/modules/apps/callbacks/README.md)
-* [ICS-20 Token Transfer](https://github.com/Ontomir/ibc/tree/master/spec/app/ics-020-fungible-token-transfer)

@@ -12,9 +12,7 @@ To create one account you can either create a private key, a keystore file (a pr
 
 Aside from having different security features, the biggest difference between each of these is that a private key or keystore file only creates one account. Creating a mnemonic phrase gives you control of many accounts, all accessible with that same phrase.
 
-Ontomir blockchains, like the Ontomir Hub, support creating accounts with mnemonic phrases, otherwise known as [hierarchical deterministic key generation](https://github.com/confio/Ontomir-hd-key-derivation-spec) (HD keys). This allows the user to create accounts on multiple blockchains without having to manage multiple secrets.
 
-HD keys generate addresses by taking the mnemonic phrase and combining it with a piece of information called a [derivation path](https://learnmeabitcoin.com/technical/derivation-paths). Blockchains can differ in which derivation path they support. To access all accounts from an mnemonic phrase on a blockchain, it is therefore important to use that blockchain's specific derivation path.
 
 ### Representing Accounts <a href="#representing-accounts" id="representing-accounts"></a>
 

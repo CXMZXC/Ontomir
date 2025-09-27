@@ -6,7 +6,6 @@ Therefore this overview explains the basics of gas calculation, how to provide f
 
 ### Prerequisite Readings[​](gas-and-fees.md#prerequisite-readings) <a href="#prerequisite-readings" id="prerequisite-readings"></a>
 
-* [Ontomir SDK Gas](https://docs.ontomir.network/main/learn/beginner/gas-fees.html)
 * [Ethereum Gas](https://ethereum.org/en/developers/docs/gas/)
 
 ### Basics[​](gas-and-fees.md#basics) <a href="#basics" id="basics"></a>
@@ -27,19 +26,17 @@ Gas can be thought of as electricity (kWh) within a house or factory, or fuel fo
 
 More on Gas:
 
-* [Ontomir Gas Fees](https://docs.ontomir.network/main/learn/beginner/gas-fees)
-* [Ontomir Tx Lifecycle](https://docs.ontomir.network/main/learn/beginner/tx-lifecycle.html)
 * [Ethereum Gas](https://ethereum.org/en/developers/docs/gas/)
 
 #### How is Gas Calculated?[​](gas-and-fees.md#how-is-gas-calculated) <a href="#how-is-gas-calculated" id="how-is-gas-calculated"></a>
 
-In general, there’s no way to know exactly how much gas a transaction will cost without simply running it. Using the Ontomir SDK, this can be done by [simulating the Tx](https://docs.ontomir.network/main/run-node/txs#simulating-a-transaction). Otherwise, there are ways to estimate the amount of gas a transaction will require, based on the details of the transaction fields, and data. In the case of the EVM, for example, each bytecode operation has a [corresponding amount of gas](https://ethereum.org/en/developers/docs/evm/opcodes/).
+In general, there’s no way to know exactly how much gas a transaction will cost without simply running it. Using the Ontomir SDK, this can be done by  Otherwise, there are ways to estimate the amount of gas a transaction will require, based on the details of the transaction fields, and data. In the case of the EVM, for example, each bytecode operation has a [corresponding amount of gas](https://ethereum.org/en/developers/docs/evm/opcodes/).
 
 More on Gas Calculations:
 
 * [Estimate Gas](https://docs.ethers.org/v5/api/providers/provider/#Provider-estimateGas)
-* [Executing EVM Bytecode](https://ethereum.org/en/developers/docs/evm/opcodes/)
-* [Simulate a Ontomir SDK Tx](https://docs.ontomir.network/main/run-node/txs#simulating-a-transaction)
+
+
 
 #### How does Gas Relate to Fees?[​](gas-and-fees.md#how-does-gas-relate-to-fees) <a href="#how-does-gas-relate-to-fees" id="how-does-gas-relate-to-fees"></a>
 
@@ -53,7 +50,6 @@ If “gas” was measured in kWh, the “gas price” would be the rate (in doll
 
 More on Gas vs. Fees:
 
-* [Ontomir Gas and Fees](https://docs.ontomir.network/main/learn/beginner/gas-fees)
 * [Ethereum Gas and Fees](https://ethereum.org/en/developers/docs/gas/)
 
 #### How are Fees Handled on Ontomir?[​](gas-and-fees.md#how-are-fees-handled-on-Ontomir) <a href="#how-are-fees-handled-on-ontomir" id="how-are-fees-handled-on-ontomir"></a>
@@ -67,7 +63,7 @@ The node will entirely consume the fees provided, then begin to execute the tran
 
 Validators for Ontomir SDK-based chains can specify their `min-gas-prices` that they will enforce when selecting transactions to include in blocks. Thus, transactions with insufficient fees will encounter delays or fail outright.
 
-At the beginning of each block, fees from the previous block are [allocated to validators and delegators](https://docs.ontomir.network/main/modules/distribution), after which they can be withdrawn and spent.
+At the beginning of each block, fees from the previous block are , after which they can be withdrawn and spent.
 
 #### How are Fees Handled on Ethereum?[​](gas-and-fees.md#how-are-fees-handled-on-ethereum) <a href="#how-are-fees-handled-on-ethereum" id="how-are-fees-handled-on-ethereum"></a>
 
@@ -147,7 +143,7 @@ In the Ontomir SDK, gas is tracked in the main `GasMeter` and the `BlockGasMeter
 
 Since gas is priced per-byte, the same interaction is more gas-intensive with larger parameter values than smaller (unlike Ethereum's `uint256` values, Ontomir SDK numericals are represented using [Big.Int](https://pkg.go.dev/math/big#Int) types, which are dynamically sized).
 
-More information regarding gas as part of the Ontomir SDK can be found [here](https://docs.ontomir.network/main/learn/beginner/gas-fees.html).
+More information regarding gas as part of the Ontomir SDK can be found.
 
 #### Matching EVM Gas consumption[​](gas-and-fees.md#matching-evm-gas-consumption) <a href="#matching-evm-gas-consumption" id="matching-evm-gas-consumption"></a>
 
@@ -155,17 +151,13 @@ Ontomir EVM supports Ethereum Web3 tooling. For this reason, gas consumption mus
 
 The main difference between EVM and Ontomir state transitions, is that the EVM uses a [gas table](https://github.com/ethereum/go-ethereum/blob/master/params/protocol_params.go) for each OPCODE, whereas Ontomir uses a `GasConfig` that charges gas for each CRUD operation by setting a flat and per-byte cost for accessing the database.
 
-+++ [https://github.com/Ontomir/Ontomir-sdk/blob/3fd376bd5659f076a4dc79b644573299fd1ec1bf/store/types/gas.go#L187-L196](https://github.com/Ontomir/Ontomir-sdk/blob/3fd376bd5659f076a4dc79b644573299fd1ec1bf/store/types/gas.go#L187-L196)
-
 In order to match the gas consumed by the EVM, the gas consumption logic from the SDK is ignored, and instead the gas consumed is calculated by subtracting the state transition leftover gas plus refund from the gas limit defined on the message.
 
-To ignore the SDK gas consumption, we reset the transaction `GasMeter` count to 0 and manually set it to the `gasUsed` value computed by the EVM module at the end of the execution.
-
-+++ [https://github.com/Ontomir/evm/blob/v0.4.1/x/vm/keeper/state\_transition.go](https://github.com/Ontomir/evm/blob/v0.4.1/x/vm/keeper/state_transition.go)
+To ignore the SDK gas consumption, we reset the transaction `GasMeter` count to 0 and manually set it to the `gasUsed` value computed by the EVM module at the end of th.
 
 #### `AnteHandler`[​](gas-and-fees.md#antehandler) <a href="#antehandler" id="antehandler"></a>
 
-The Ontomir SDK [`AnteHandler`](https://docs.ontomir.network/main/learn/beginner/gas-fees.html#antehandler) performs basic checks prior to transaction execution. These checks are usually signature verification, transaction field validation, transaction fees, etc.
+The Ontomir SDK performs basic checks prior to transaction execution. These checks are usually signature verification, transaction field validation, transaction fees, etc.
 
 Regarding gas consumption and fees, the `AnteHandler` checks that the user has enough balance to cover for the tx cost (amount plus fees) as well as checking that the gas limit defined in the message is greater or equal than the computed intrinsic gas for the message.
 
@@ -184,12 +176,6 @@ For this same reason, in the Ontomir EVM it is possible to send transactions wit
 Ethereum provides a JSON-RPC endpoint `eth_estimateGas` to help users set up a correct gas limit in their transactions.
 
 For that reason, a specific query API `EstimateGas` is implemented in the Ontomir EVM. It will apply the transaction against the current block/state and perform a binary search in order to find the optimal gas value to return to the user (the same transaction will be applied over and over until we find the minimum gas needed before it fails). The reason we need to use a binary search is that the gas required for the transaction might be higher than the value returned by the EVM after applying the transaction, so we need to try until we find the optimal value.
-
-A cache context will be used during the whole execution to avoid changes be persisted in the state.
-
-+++ [https://github.com/Ontomir/evm/blob/v0.4.1/x/vm/keeper/grpc\_query.go](https://github.com/Ontomir/evm/blob/v0.4.1/x/vm/keeper/grpc_query.go)
-
-For Ontomir Tx's, developers can use Ontomir SDK's [transaction simulation](https://docs.ontomir.network/main/run-node/txs#simulating-a-transaction) to create an accurate estimate.
 
 #### Cross-Chain Gas and Fees[​](gas-and-fees.md#cross-chain-gas-and-fees) <a href="#cross-chain-gas-and-fees" id="cross-chain-gas-and-fees"></a>
 

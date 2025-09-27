@@ -6,7 +6,6 @@ During the pending state, the transaction initiator is allowed to change the tra
 
 ### Prerequisite Readings[​](pending-state.md#prerequisite-readings) <a href="#prerequisite-readings" id="prerequisite-readings"></a>
 
-* [Ontomir SDK Mempool](https://docs.ontomir.network/main/building-apps/app-mempool)
 * Mempool Architecture
 
 ### Ontomir EVM vs Ethereum[​](pending-state.md#Ontomir-evm-vs-ethereum) <a href="#ontomir-evm-vs-ethereum" id="ontomir-evm-vs-ethereum"></a>

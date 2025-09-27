@@ -2,20 +2,20 @@
 
 > Ontomir EVM is a framework that allows you to add Ethereum Virtual Machine (EVM) compatibility to any Ontomir SDK-based chain. It is built using the which runs on top of the (a fork of ) consensus engine, to accomplish fast finality, high transaction throughput and short block times (\~2 seconds).
 
-This architecture allows users to perform both Ontomir and EVM formatted transactions, developers to scale EVM dApps cross-chain via [IBC](https://ontomir.network/ibc), and tokens and assets in the network to come from different independent sources.
+This architecture allows users to perform both Ontomir and EVM formatted transactions, developers to scale EVM dApps cross-chain via IBC, and tokens and assets in the network to come from different independent sources.
 
 Ontomir EVM enables these key features by:
 
-* Leveraging [modules](https://docs.ontomir.network/v0.47/build/building-modules/intro) and other mechanisms implemented by the [Ontomir SDK](https://docs.ontomir.network/).
-* Implementing CometBFT's Application Blockchain Interface ([ABCI](https://docs.cometbft.com/v1.0/spec/abci/)) to manage the blockchain.
+* Leveraging modules and other mechanisms implemented by the Ontomir SDK.
+* Implementing CometBFT's Application Blockchain Interface (ABCI) to manage the blockchain.
 * Utilizing [`geth`](https://github.com/ethereum/go-ethereum) as a library to promote code reuse and improve maintainability.
 * Exposing a fully compatible Web3 JSON-RPC layer for interacting with existing Ethereum clients and tooling (Metamask, Remix, etc).
 
-The sum of these features allows developers to leverage existing Ethereum ecosystem tooling and software to seamlessly deploy smart contracts which interact with the rest of the Ontomir [ecosystem](https://ontomir.network/ecosystem).
+The sum of these features allows developers to leverage existing Ethereum ecosystem tooling and software to seamlessly deploy smart contracts which interact with the rest of the Ontomir ecosystem.
 
 ### Ontomir SDK[​](technical-architecture.md#Ontomir-sdk) <a href="#ontomir-sdk" id="ontomir-sdk"></a>
 
-Ontomir EVM enables the full composability and modularity of the [Ontomir SDK](https://docs.ontomir.network/). It includes standard modules from the Ontomir SDK that work side to side with EVM-specific modules. Check out the list of modules to get an overview of what each module is responsible for.
+Ontomir EVM enables the full composability and modularity of the Ontomir SDK. It includes standard modules from the Ontomir SDK that work side to side with EVM-specific modules. Check out the list of modules to get an overview of what each module is responsible for.
 
 ### CometBFT & ABCI[​](technical-architecture.md#cometbft--abci) <a href="#cometbft-andamp-abci" id="cometbft-andamp-abci"></a>
 
@@ -45,4 +45,4 @@ If you want to learn more about how Ontomir EVM achieves EVM compatibility as a 
 
 ### Contributing[​](technical-architecture.md#contributing) <a href="#contributing" id="contributing"></a>
 
-You can contribute to the Ontomir EVM's open-source codebase through [issues on GitHub](https://github.com/Ontomir/evm/issues) using the [Ontomir EVM Contributor Guideline](https://github.com/Ontomir/evm/blob/main/CONTRIBUTING.md)
+You can contribute to the Ontomir EVM's open-source codebase through issues on GitHub using the Ontomir EVM Contributor Guideline

@@ -17,11 +17,3 @@ Build application-specific blockchains tailored to your exact use case with sove
 The Ontomir SDK includes several battle-tested core modules:
 
 Token transfers, account balances, and multi-asset support with built-in safety features. Proof-of-Stake consensus, validator delegation, and slashing conditions for network security. On-chain governance with proposals, voting, and parameter changes for decentralized decision-making. Fee distribution, staking rewards, and validator commission handling with automated payouts. Account authentication, transaction signing, and account management with multi-signature support. Inter-blockchain communication protocol for cross-chain token transfers and data packets.
-
-### Getting Started <a href="#getting-started" id="getting-started"></a>
-
-Comprehensive guides, tutorials, and API references for building with the Ontomir SDK. [Visit SDK Docs →](https://docs.ontomir.network/) Learn how to build custom modules and integrate them into your blockchain application. [Build Modules →](https://docs.ontomir.network/main/building-modules/intro)
-
-### Community & Resources <a href="#community-andamp-resources" id="community-andamp-resources"></a>
-
-Source code, issues, and contribution guidelines for the Ontomir SDK project. [View GitHub →](https://github.com/Ontomir/Ontomir-sdk) Join discussions with other Ontomir SDK developers and get help from the community. [Join Forum →](https://forum.ontomir.network/)
